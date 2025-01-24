@@ -34,7 +34,7 @@ export default defineConfig({
         globDirectory: 'dist',
         globPatterns: ['**/*.{html,js,css,webmanifest}'],
         globIgnores: ['polyfills/*.js', 'nomodule-*.js'],
-        navigateFallback: 'index.html',
+        navigateFallback: '/index.html',
         runtimeCaching: [
           {
             urlPattern: /^polyfills\/.*\.js$/,

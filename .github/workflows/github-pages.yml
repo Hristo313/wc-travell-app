@@ -52,7 +52,12 @@ jobs:
       run: |
         sed -i 's|href="/Bjs8AWqS.css"|href="/${{ github.event.repository.name }}/Bjs8AWqS.css"|' ./dist/index.html
         sed -i 's|href="/manifest.webmanifest"|href="/${{ github.event.repository.name }}/manifest.webmanifest"|' ./dist/index.html
-        sed -i 's|src="/registerSW.js"|src="/${{ github.event.repository.name }}/registerSW.js"|' ./dist/index.html
+    - name: Update service worker path in registerSW.js
+      run: |
+        sed -i 's|navigator.serviceWorker.register("/sw.js"|navigator.serviceWorker.register("/${{ github.event.repository.name }}/sw.js"|g' ./dist/registerSW.js
+    - name: Update all JS paths in index.html
+      run: |
+        sed -i 's|src="/|src="/${{ github.event.repository.name }}/|g' ./dist/index.html
     - name: SPA routing handling
       run: cp ./dist/index.html ./dist/404.html
     - name: Upload build artifact to GitHub Pages
