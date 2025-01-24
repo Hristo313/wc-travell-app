@@ -48,10 +48,11 @@ jobs:
       run: cp ./ig-theme.css ./dist/
     - name: Update href Paths for ig-theme.css
       run: find ./dist -type f -exec sed -i "s|href=\"../../ig-theme.css\"|href=\"../../${{ github.event.repository.name }}/ig-theme.css\"|g" {} +
-    - name: Update Resource Paths in SW files
+    - name: Update Resource Paths in index.html
       run: |
-        sed -i "s|\"/Bjs8AWqS.css\"|\"/$${{ github.event.repository.name }}/Bjs8AWqS.css\"|g" ./dist/sw.js
-        sed -i "s|\"/registerSW.js\"|\"/${{ github.event.repository.name }}/registerSW.js\"|g" ./dist/sw.js
+        sed -i 's|href="/Bjs8AWqS.css"|href="/${{ github.event.repository.name }}/Bjs8AWqS.css"|' ./dist/index.html
+        sed -i 's|href="/manifest.webmanifest"|href="/${{ github.event.repository.name }}/manifest.webmanifest"|' ./dist/index.html
+        sed -i 's|src="/registerSW.js"|src="/${{ github.event.repository.name }}/registerSW.js"|' ./dist/index.html
     - name: SPA routing handling
       run: cp ./dist/index.html ./dist/404.html
     - name: Upload build artifact to GitHub Pages
